@@ -1,0 +1,343 @@
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import axios from "axios";
+import router from '../router';
+
+import VueSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css';
+
+import Header from "../components/Header.vue";
+import Footer from "../components/Footer.vue";
+import Modal from "../components/Modal.vue";
+
+// Vue.component('v-select', vSelect)
+
+let modalId = ref(null);
+let isModalOpen = ref(false);
+let allMovieData = ref(null);
+let pageOn = ref(1);
+
+let selectedOption = ref(null);
+
+let movieTrending = ref(null);
+
+const props = defineProps({
+    movieId: String,
+});
+
+const GoToPage = () => {
+    router.push('/trending');
+}
+
+const getData = async (url, params) => {
+    try {
+        return await axios.get(url, params);
+    } catch (error) {
+        console.log(error);
+    }
+};
+const get20Movies = async () => {
+    const movieData = (
+        await getData("https://api.themoviedb.org/3/trending/movie/week?", {
+            params: {
+                api_key: "ba4adcc4706ed37650e0a813de11a08f",
+                page: pageOn.value,
+                adult: false
+            },
+        })
+    ).data.results;
+    pageOn.value++
+    console.log(movieData);
+    if (movieTrending.value == null) {
+        movieTrending.value = movieData;
+    } else {
+        movieTrending.value = movieTrending.value.concat(movieData);
+    }
+    console.log(movieTrending);
+};
+// get20Movies();
+
+const getGenres = async () => {
+    const movieData = (
+        await getData("https://api.themoviedb.org/3/discover/movie?", {
+            params: {
+                api_key: "ba4adcc4706ed37650e0a813de11a08f",
+                with_genres: selectedOption.value.id,
+                page: pageOn.value,
+                include_adult: false
+            },
+        })
+    ).data.results;
+    //   pageOn.value++
+    console.log(movieData);
+    console.log(selectedOption.value.title)
+    //   if (movieTrending.value == null) {
+    movieTrending.value = movieData;
+    //   } else {
+    //     movieTrending.value = movieTrending.value.concat(movieData);
+    //   }
+    //   console.log(movieTrending);
+};
+
+const showModal = (id) => {
+    console.log(id)
+    modalId.value = `${id}`;
+    isModalOpen.value = true;
+}
+</script>
+
+<template>
+    <div class="store-container">
+        <Header page="Movies" buttonPush="/cart" buttonName="Cart" />
+        <div class="trending-container">
+            <button id="trendingOrTop" @click="GoToPage">Get Trending</button>
+        </div>
+        <div class="genres-dropdown">
+            <vue-select placeholder="Choose a Genre" class="vSelect" label="title" :options="[
+                { title: 'Action', id: 28 },
+                { title: 'Adventure', id: 12 },
+                { title: 'Animation', id: 16 },
+                { title: 'Comedy', id: 35 },
+                { title: 'Crime', id: 80 },
+                { title: 'Documentary', id: 99 },
+                { title: 'Drama', id: 18 },
+                { title: 'Family', id: 10751 },
+                { title: 'Fantasy', id: 14 },
+                { title: 'History', id: 36 },
+                { title: 'Horror', id: 27 },
+                { title: 'Music', id: 10402 },
+                { title: 'Mystery', id: 9648 },
+                { title: 'Romance', id: 10749 },
+                { title: 'Sci-Fi', id: 878 },
+                { title: 'TV Movie', id: 10770 },
+                { title: 'Thriller', id: 53 },
+                { title: 'War', id: 10752 },
+                { title: 'Western', id: 37 },
+            ]" v-model="selectedOption"></vue-select>
+            <button id="moreMoviesButton" @click="getGenres">Get Movies</button>
+        </div>
+        <div class="images">
+            <TransitionGroup name="moviePostersList">
+                <li class="image-container" v-for="movies in movieTrending" :key="movies">
+                    <img class="moviePosters" :src="`https://image.tmdb.org/t/p/w500${movies.poster_path}`"
+                        :alt="movies.title" :props.movieId="`${movies.id}`" @click="showModal(movies.id)" />
+                </li>
+            </TransitionGroup>
+        </div>
+        <Footer />
+        <!-- <button id="moreMoviesButton" @click="get20Movies" v-if="(pageOn <= 5)">More Movies</button> -->
+        <h3 v-if="(pageOn > 5)" class="thatsIt">That's Enough!!!</h3>
+
+        <Modal :show="isModalOpen" @close="isModalOpen = false" :id="modalId" />
+    </div>
+</template>
+
+<style scoped>
+.vSelect {
+    margin: 1rem;
+    margin-left: 20vw;
+    margin-right: 20vw;
+    text-align: center;
+
+
+    --vs-font-size: 1.25rem;
+
+    --vs-controls-color: darkgoldenrod;
+    --vs-border-color: darkgoldenrod;
+    
+    --vs-border-width: 4px;
+    --vs-border-style: solid;
+    --vs-border-radius: 2px;
+
+    --vs-dropdown-bg: #0f0d06;
+    --vs-dropdown-color: darkgoldenrod;
+    --vs-dropdown-option-color: darkgoldenrod;
+
+    --vs-selected-bg: darkgoldenrod;
+    --vs-selected-color: darkgoldenrod;
+    --vs-selected-border-color: darkgoldenrod;
+
+    --vs-search-input-color: darkgoldenrod;
+
+    --vs-dropdown-min-width: 60vw;
+    --vs-dropdown-max-width: 60vw;
+    --vs-dropdown-min-height: 4rem;
+    --vs-dropdown-max-height: 30vh;
+
+
+    --vs-dropdown-option--active-bg: darkgoldenrod;
+    --vs-dropdown-option--active-color: black;
+
+    --vs-search-input-placeholder-color: rgba(184, 135, 11, 0.845);
+}
+
+.vSelect .vs__search::placeholder,
+.style-chooser .vs__dropdown-toggle,
+.style-chooser .vs__dropdown-menu{
+    text-align: center;
+}
+
+.trending-container {
+    position: absolute;
+    margin: auto;
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: transparent;
+    display: flex;
+    justify-self: center;
+    justify-content: center;
+    align-items: center;
+    height: 4rem;
+}
+
+#trendingOrTop {
+    pointer-events: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 1rem;
+    border: rgb(255, 180, 18) solid 3px;
+    background-color: darkgoldenrod;
+    color: black;
+    width: 30%;
+    height: 2.5rem;
+    font-size: 130%;
+    cursor: pointer;
+}
+
+#trendingOrTop:hover {
+    transition: .2s ease;
+    background-color: rgb(255, 180, 18);
+    color: black;
+}
+
+#trendingOrTop:active {
+    background-color: rgb(255, 180, 18);
+    border: rgb(255, 180, 18) solid 3px;
+}
+
+.thatsIt {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+#moreMoviesButton {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 1rem;
+    border: rgb(255, 180, 18) solid 3px;
+    background-color: darkgoldenrod;
+    color: black;
+    width: 30%;
+    padding: 8px;
+    height: 100%;
+    font-size: 125%;
+    margin-left: auto;
+    margin-right: auto;
+    cursor: pointer;
+
+    box-shadow: 0px 5px 0rem 0vw rgb(116, 85, 9);
+}
+
+#moreMoviesButton:hover {
+    transition: .2s ease;
+    background-color: rgb(210, 154, 12);
+    color: black;
+}
+
+#moreMoviesButton:active {
+    background-color: rgb(236, 173, 15);
+    border: rgb(255, 193, 37) solid;
+    box-shadow: 0px 0px 0rem 0vw rgb(116, 85, 9);
+}
+
+.close-mask {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background-color: transparent;
+    width: 100vw;
+    height: 100vh;
+}
+
+.list-move,
+.moviePostersList-enter-active {
+    transition: opacity 5s ease, transform 2s ease;
+}
+
+.moviePostersList-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.moviePostersList-enter-from,
+.moviePostersList-leave-to {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.store-container {
+    width: 100%;
+    margin-bottom: 5rem;
+}
+
+.images {
+    margin: 0 2% 0 2%;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    row-gap: 1rem;
+}
+
+.image-container {
+    text-align: center;
+    display: grid;
+    grid-column: span 1;
+    margin: auto;
+}
+
+.image-container img {
+    aspect-ratio: 2/3;
+    width: 100%;
+    height: 100%;
+}
+
+.moviePosters {
+    max-width: 100%;
+    max-height: 100%;
+    border: solid darkgoldenrod 4px;
+    border-radius: 0.2rem;
+}
+
+.moviePosters:hover {
+    border-color: #ffbd2f;
+    cursor: pointer;
+    transform: scale(1.04);
+    transition: transform 0.2s;
+}
+
+@media screen and (max-width: 200px) and (max-width: 400px) {
+    .images {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width: 400px) and (min-width: 200px) {
+    .images {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 500px) and (min-width: 400px) {
+    .images {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+</style>
