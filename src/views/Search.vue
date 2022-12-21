@@ -59,7 +59,7 @@ const showModal = (id) => {
   <div class="store-container">
     <Header page="Search" buttonPush="/cart" buttonName="Cart" />
     <div class="trending-container">
-      <button id="trendingOrTop" @click="GoToPage">Go To Purchase Page</button>
+      <button id="trendingOrTop" @click="GoToPage">Get Genres</button>
     </div>
     <div class="searchBox">
       <form @submit.prevent="login()">

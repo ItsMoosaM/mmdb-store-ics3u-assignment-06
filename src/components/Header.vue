@@ -6,6 +6,7 @@ const props = defineProps({
     page: String
     , buttonName: String
     , buttonPush: String
+    , cart: Boolean
 })
 const pushTo = props.buttonPush;
 
@@ -15,6 +16,8 @@ const GoToPage = () => {
 const GoToHome = () => {
     router.push('/');
 }
+
+props.cart = false;
 </script>
 
 <template>
@@ -22,7 +25,8 @@ const GoToHome = () => {
         <div id="headerContainer">
             <h1 class="title 1" @click="GoToHome">MMDB Store</h1>
             <h1 id="pageName">{{ props.page }}</h1>
-            <button id="loginButton" @click="GoToPage">{{ props.buttonName }}</button>
+            
+            <button id="loginButton" @click="GoToPage">{{ props.buttonName }} <i v-if="props.cart" class="fa fa-shopping-cart"></i></button>
         </div>
     </div>
 </template>

@@ -139,6 +139,7 @@ const removeMovie = () => {
 
 .modal-mask {
   position: fixed;
+  z-index: 2;
   inset: 0;
   background: rgba(0, 0, 0, .7);
   display: grid;

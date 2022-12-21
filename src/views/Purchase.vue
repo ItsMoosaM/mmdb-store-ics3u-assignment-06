@@ -5,7 +5,8 @@ import axios from "axios";
 import router from '../router';
 
 import VueSelect from 'vue-select'
-import 'vue-select/dist/vue-select.css';
+// import 'vue-select/dist/vue-select.css';
+import '../assets/vue-select.css'
 
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
@@ -89,7 +90,7 @@ const showModal = (id) => {
 
 <template>
     <div class="store-container">
-        <Header page="Movies" buttonPush="/cart" buttonName="Cart" />
+        <Header page="Movies" buttonPush="/cart" buttonName="" cart=true />
         <div class="trending-container">
             <button id="trendingOrTop" @click="GoToPage">Get Trending</button>
         </div>
@@ -140,6 +141,7 @@ const showModal = (id) => {
     margin-right: 20vw;
     text-align: center;
 
+    
 
     --vs-font-size: 1.25rem;
 
