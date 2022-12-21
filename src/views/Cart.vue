@@ -75,11 +75,17 @@ const showModal = (id) => {
   modalId.value = `${id}`;
   isModalOpen.value = true;
 }
+const clearCart = () => {
+  store.cartMovies.length=0;
+}
 </script>
 
 <template>
   <div class="store-container">
     <Header page="My Cart" buttonPush="/" buttonName="Home"></Header>
+    <div class="clear-container">
+      <button class="clear-button" @click="clearCart" v-if="store.cartMovies.length>1">Clear All</button>
+    </div>
     <div v-if="store.cartMovies.length==0" class="empty-cart-container">
       <div class="text-overlay">
         <h1>Your Cart Is Empty</h1>
@@ -102,6 +108,26 @@ const showModal = (id) => {
 </template>
 
 <style scoped>
+.clear-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.clear-button{
+  font-size: 170%;
+  background-color: transparent;
+  border: solid 3px darkgoldenrod;
+  line-height: 150%;
+  margin-top: 2%;
+  padding: 0px 5% 0px 5%;
+  border-radius: 0.05rem;
+}.clear-button:hover{
+  transition: .1s ease;
+  font-size: 170%;
+  background-color: rgba(184, 135, 11, 0.2);
+  cursor: pointer;
+}
 .fa{
   font-size: 5rem;
 }
@@ -294,5 +320,20 @@ const showModal = (id) => {
   font-size: 170%;
   background-color: rgba(184, 135, 11, 0.2);
   cursor: pointer;
+}
+
+.list-move,
+.moviePostersList-enter-active {
+  transition: opacity 5s ease, transform 2s ease;
+}
+
+.moviePostersList-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.moviePostersList-enter-from,
+.moviePostersList-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
 }
 </style>
