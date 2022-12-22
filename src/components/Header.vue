@@ -80,7 +80,9 @@ props.cart = false;
     background-color: rgba(184, 135, 11, 0.2);
     cursor: pointer;
 }
-
+.fa{
+    background-color: transparent;
+}
 @media screen and (min-width: 600px) {
     .title {
         font-size: 32px;

@@ -57,7 +57,7 @@ const showModal = (id) => {
 
 <template>
   <div class="store-container">
-    <Header page="Search" buttonPush="/cart" buttonName="" cart="true" />
+    <Header page="Search" buttonPush="/cart" buttonName="" cart=true />
     <div class="trending-container">
       <button id="trendingOrTop" @click="GoToPage">Get Genres</button>
     </div>

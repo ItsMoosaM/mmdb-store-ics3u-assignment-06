@@ -110,9 +110,11 @@ const removeMovie = () => {
               </ul>
             </div>
 
-            <button v-if="(store.cartMovies.filter(movie => movie.id == allMovieData.id).length == 0)" @click="addMovie"
-              class="addorremove-cart-button">Add To Cart</button>
-            <button v-else @click="removeMovie" class="addorremove-cart-button">Remove From Cart</button>
+            <Transition name="cartButton" v-if="id == allMovieData.id">
+              <button v-if="(store.cartMovies.filter(movie => movie.id == allMovieData.id).length == 0)"
+                @click="addMovie" class="addorremove-cart-button">Add To Cart</button>
+              <button v-else @click="removeMovie" class="addorremove-cart-button">Remove From Cart</button>
+            </Transition>
             <br>
           </div>
         </div>
@@ -123,6 +125,17 @@ const removeMovie = () => {
 </template>
 
 <style scoped>
+.cartButton-enter-active,
+.cartButton-leave-active {
+  transition: opacity 1s linear, transform .5s ease;
+}
+
+.cartButton-enter-from,
+.cartButton-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: auto;
@@ -151,10 +164,16 @@ const removeMovie = () => {
   padding-top: 0%;
   padding: 0.5rem;
   width: 85vw;
+  min-width: 40vw;
+  max-width: 95vw;
   height: 70vh;
+  min-height: 40vh;
+  max-height: 95vh;
   border: darkgoldenrod 0.5rem solid;
   border-radius: 0.1rem;
   margin: auto;
+  resize: both;
+  overflow: auto;
 }
 
 .modal-content-container {
@@ -342,13 +361,17 @@ const removeMovie = () => {
   margin-right: auto;
   cursor: pointer;
   box-shadow: 0px 5px 0rem 0vw rgb(116, 85, 9);
-}.addorremove-cart-button:hover {
+}
+
+.addorremove-cart-button:hover {
   transition: .2s ease;
   background-color: rgb(210, 154, 12);
   color: black;
-}.addorremove-cart-button:active {
+}
+
+.addorremove-cart-button:active {
   background-color: rgb(236, 173, 15);
-  border: rgb(255, 193, 37) solid ;
+  border: rgb(255, 193, 37) solid;
   box-shadow: 0px 0px 0rem 0vw rgb(116, 85, 9);
 }
 </style>

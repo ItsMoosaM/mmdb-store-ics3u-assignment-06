@@ -76,25 +76,29 @@ const showModal = (id) => {
   isModalOpen.value = true;
 }
 const clearCart = () => {
-  store.cartMovies.length=0;
+  store.cartMovies.length = 0;
 }
 </script>
 
 <template>
   <div class="store-container">
     <Header page="My Cart" buttonPush="/" buttonName="Home"></Header>
-    <div class="clear-container">
-      <button class="clear-button" @click="clearCart" v-if="store.cartMovies.length>1">Clear All</button>
-    </div>
-    <div v-if="store.cartMovies.length==0" class="empty-cart-container">
-      <div class="text-overlay">
-        <h1>Your Cart Is Empty</h1>
-        <i class="fa fa-shopping-cart" />
-        <button class="goBuy" @click="router.push('/trending')">Add Something</button>
+    <Transition name="cartButton" >
+      <div class="clear-container" v-if="store.cartMovies.length>0">
+        <button class="clear-button" @click="clearCart" >Remove All</button>
       </div>
-    </div>
+    </Transition>
+    <TransitionGroup name="emptyCart">
+      <div v-if="store.cartMovies.length == 0" class="empty-cart-container">
+        <div class="text-overlay">
+          <h1>Your Cart Is Empty</h1>
+          <i class="fa fa-shopping-cart" />
+          <button class="goBuy" @click="router.push('/trending')">Add Something</button>
+        </div>
+      </div>
+    </TransitionGroup>
 
-    <div v-if="store.cartMovies.length!=0" class="images">
+    <div v-if="store.cartMovies.length != 0" class="images">
       <TransitionGroup name="moviePostersList">
         <li class="image-container" v-for="movies in store.cartMovies" :key="movies">
           <img class="moviePosters" :src="`https://image.tmdb.org/t/p/w500${movies.poster_path}`" :alt="movies.title"
@@ -108,13 +112,51 @@ const clearCart = () => {
 </template>
 
 <style scoped>
-.clear-container{
+.cartButton-enter-active{
+  transition: opacity .5s linear, transform .5s ease;
+}
+.cartButton-leave-active {
+  transition: opacity .5s linear, transform .5s ease;
+}
+
+.cartButton-enter-from,
+.cartButton-leave-to {
+  opacity: 0;
+  transform: scale(0);
+}
+.list-move,
+.moviePostersList-enter-active {
+  transition: opacity 5s ease, transform 2s ease;
+}
+.moviePostersList-leave-active {
+  transition: opacity 0.3s ease;
+}
+.moviePostersList-enter-from,
+.moviePostersList-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+.list-move,
+.emptyCart-enter-active {
+  transition: opacity 5s ease, transform 2s ease;
+}
+.emptyCart-leave-active {
+  transition: opacity 0.3s ease;
+}
+.emptyCart-enter-from,
+.emptyCart-leave-to {
+  transform: scale(0);
+  opacity: 0;
+}
+
+.clear-container {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.clear-button{
+
+.clear-button {
   font-size: 170%;
   background-color: transparent;
   border: solid 3px darkgoldenrod;
@@ -122,16 +164,22 @@ const clearCart = () => {
   margin-top: 2%;
   padding: 0px 5% 0px 5%;
   border-radius: 0.05rem;
-}.clear-button:hover{
+}
+
+.clear-button:hover {
   transition: .1s ease;
   font-size: 170%;
   background-color: rgba(184, 135, 11, 0.2);
   cursor: pointer;
 }
-.fa{
+
+.fa {
   font-size: 5rem;
+  background-color: transparent;
 }
+
 .empty-cart-container {
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -233,20 +281,6 @@ const clearCart = () => {
   height: 100vh;
 }
 
-.list-move,
-.moviePostersList-enter-active {
-  transition: opacity 5s ease, transform 2s ease;
-}
-
-.moviePostersList-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.moviePostersList-enter-from,
-.moviePostersList-leave-to {
-  transform: translateX(-100%);
-  opacity: 0;
-}
 
 .store-container {
   width: 100%;
@@ -307,7 +341,7 @@ const clearCart = () => {
   }
 }
 
-.goBuy{
+.goBuy {
   font-size: 170%;
   background-color: transparent;
   border: solid 3px darkgoldenrod;
@@ -315,7 +349,9 @@ const clearCart = () => {
   margin-top: 2%;
   padding: 0px 5% 0px 5%;
   border-radius: 0.05rem;
-}.goBuy:hover{
+}
+
+.goBuy:hover {
   transition: .1s ease;
   font-size: 170%;
   background-color: rgba(184, 135, 11, 0.2);

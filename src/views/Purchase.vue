@@ -5,14 +5,14 @@ import axios from "axios";
 import router from '../router';
 
 import VueSelect from 'vue-select'
-// import 'vue-select/dist/vue-select.css';
 import '../assets/vue-select.css'
+import { useStore } from "../store/index.js";
 
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import Modal from "../components/Modal.vue";
 
-// Vue.component('v-select', vSelect)
+const store = useStore();
 
 let modalId = ref(null);
 let isModalOpen = ref(false);
@@ -59,20 +59,24 @@ const get20Movies = async () => {
 };
 // get20Movies();
 
-const getGenres = async () => {
+const getGenres = async (id) => {
     const movieData = (
         await getData("https://api.themoviedb.org/3/discover/movie?", {
             params: {
                 api_key: "ba4adcc4706ed37650e0a813de11a08f",
                 with_genres: selectedOption.value.id,
+                // selectedOption.value.id,
                 page: pageOn.value,
                 include_adult: false
             },
         })
     ).data.results;
+
+    // let mov = movieData
+    // return mov;
     //   pageOn.value++
     console.log(movieData);
-    console.log(selectedOption.value.title)
+    // console.log(selectedOption.value.title)
     //   if (movieTrending.value == null) {
     movieTrending.value = movieData;
     //   } else {
@@ -80,6 +84,20 @@ const getGenres = async () => {
     //   }
     //   console.log(movieTrending);
 };
+
+const getAllGenres = async () => {
+    store.action = await getGenres(28);
+    console.log(store.action)
+    movieTrending.value = store.action
+}
+// getAllGenres()
+
+
+const showGenre = (genre) => {
+    movieTrending.value = store.action;
+    console.log(movieTrending.value)
+    
+}
 
 const showModal = (id) => {
     console.log(id)
@@ -141,13 +159,13 @@ const showModal = (id) => {
     margin-right: 20vw;
     text-align: center;
 
-    
+
 
     --vs-font-size: 1.25rem;
 
     --vs-controls-color: darkgoldenrod;
     --vs-border-color: darkgoldenrod;
-    
+
     --vs-border-width: 4px;
     --vs-border-style: solid;
     --vs-border-radius: 2px;
@@ -176,7 +194,7 @@ const showModal = (id) => {
 
 .vSelect .vs__search::placeholder,
 .style-chooser .vs__dropdown-toggle,
-.style-chooser .vs__dropdown-menu{
+.style-chooser .vs__dropdown-menu {
     text-align: center;
 }
 
