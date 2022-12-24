@@ -27,10 +27,6 @@ const props = defineProps({
     movieId: String,
 });
 
-const GoToPage = () => {
-    router.push('/trending');
-}
-
 const getData = async (url, params) => {
     try {
         return await axios.get(url, params);
@@ -38,33 +34,12 @@ const getData = async (url, params) => {
         console.log(error);
     }
 };
-const get20Movies = async () => {
-    const movieData = (
-        await getData("https://api.themoviedb.org/3/trending/movie/week?", {
-            params: {
-                api_key: "ba4adcc4706ed37650e0a813de11a08f",
-                page: pageOn.value,
-                adult: false
-            },
-        })
-    ).data.results;
-    pageOn.value++
-    console.log(movieData);
-    if (movieTrending.value == null) {
-        movieTrending.value = movieData;
-    } else {
-        movieTrending.value = movieTrending.value.concat(movieData);
-    }
-    console.log(movieTrending);
-};
-// get20Movies();
-
 const getGenres = async (id) => {
     const movieData = (
         await getData("https://api.themoviedb.org/3/discover/movie?", {
             params: {
                 api_key: "ba4adcc4706ed37650e0a813de11a08f",
-                with_genres: selectedOption.value.id,
+                with_genres: id,
                 // selectedOption.value.id,
                 page: pageOn.value,
                 include_adult: false
@@ -72,31 +47,113 @@ const getGenres = async (id) => {
         })
     ).data.results;
 
-    // let mov = movieData
-    // return mov;
+    let mov = movieData
+    return mov;
     //   pageOn.value++
-    console.log(movieData);
+    // console.log(movieData);
     // console.log(selectedOption.value.title)
     //   if (movieTrending.value == null) {
-    movieTrending.value = movieData;
+    // movieTrending.value = movieData;
     //   } else {
     //     movieTrending.value = movieTrending.value.concat(movieData);
     //   }
     //   console.log(movieTrending);
 };
-
+//Stores to Pinia On Load
 const getAllGenres = async () => {
-    store.action = await getGenres(28);
-    console.log(store.action)
-    movieTrending.value = store.action
+    store.Action = await getGenres(28);
+    store.Adventure = await getGenres(12);
+    store.Animation = await getGenres(16);
+    store.Comedy = await getGenres(35);
+    store.Crime = await getGenres(80);
+    store.Documentary = await getGenres(99);
+    store.Drama = await getGenres(18);
+    store.Family = await getGenres(10751);
+    store.Fantasy = await getGenres(14);
+    store.History = await getGenres(36);
+    store.Horror = await getGenres(27);
+    store.Music = await getGenres(10402);
+    store.Mystery = await getGenres(9648);
+    store.Romance = await getGenres(10749);
+    store.SciFi = await getGenres(878);
+    store.TVMovie = await getGenres(10770);
+    store.Thriller = await getGenres(53);
+    store.War = await getGenres(10752);
+    store.Western = await getGenres(37);
+    console.log('On Load')
 }
-// getAllGenres()
 
+if (!store.IsDataLoaded) {
+    getAllGenres();
+    store.IsDataLoaded = true;
+} else {
 
-const showGenre = (genre) => {
-    movieTrending.value = store.action;
-    console.log(movieTrending.value)
-    
+}
+
+//Gets from store
+const showGenre = () => {
+    switch (selectedOption.value.id) {
+        case 28:
+            movieTrending.value = store.Action
+            break;
+        case 12:
+            movieTrending.value = store.Adventure
+            break;
+        case 16:
+            movieTrending.value = store.Animation
+            break;
+        case 35:
+            movieTrending.value = store.Comedy
+            break;
+        case 80:
+            movieTrending.value = store.Crime
+            break;
+        case 99:
+            movieTrending.value = store.Documentary
+            break;
+        case 18:
+            movieTrending.value = store.Drama
+            break;
+        case 10751:
+            movieTrending.value = store.Family
+            break;
+        case 14:
+            movieTrending.value = store.Fantasy
+            break;
+        case 36:
+            movieTrending.value = store.History
+            break;
+        case 27:
+            movieTrending.value = store.Horror
+            break;
+        case 10402:
+            movieTrending.value = store.Music
+            break;
+        case 9648:
+            movieTrending.value = store.Mystery
+            break;
+        case 10749:
+            movieTrending.value = store.Romance
+            break;
+        case 878:
+            movieTrending.value = store.SciFi
+            break;
+        case 10770:
+            movieTrending.value = store.TVMovie
+            break;
+        case 53:
+            movieTrending.value = store.Thriller
+            break;
+        case 10752:
+            movieTrending.value = store.War
+            break;
+        case 37:
+            movieTrending.value = store.Western
+            break;
+        default:
+            movieTrending.value = null;
+            break;
+    }
 }
 
 const showModal = (id) => {
@@ -108,9 +165,9 @@ const showModal = (id) => {
 
 <template>
     <div class="store-container">
-        <Header page="Movies" buttonPush="/cart" buttonName="" cart=true />
+        <Header page="Movies" buttonPush="/cart" buttonName="" cart="true" />
         <div class="trending-container">
-            <button id="trendingOrTop" @click="GoToPage">Get Trending</button>
+            <button id="trendingOrTop" @click="router.push('/trending')">Get Trending</button>
         </div>
         <div class="genres-dropdown">
             <vue-select placeholder="Choose a Genre" class="vSelect" label="title" :options="[
@@ -134,7 +191,7 @@ const showModal = (id) => {
                 { title: 'War', id: 10752 },
                 { title: 'Western', id: 37 },
             ]" v-model="selectedOption"></vue-select>
-            <button id="moreMoviesButton" @click="getGenres">Get Movies</button>
+            <button id="moreMoviesButton" @click="showGenre()">Get Movies</button>
         </div>
         <div class="images">
             <TransitionGroup name="moviePostersList">
@@ -146,7 +203,7 @@ const showModal = (id) => {
         </div>
         <Footer />
         <!-- <button id="moreMoviesButton" @click="get20Movies" v-if="(pageOn <= 5)">More Movies</button> -->
-        <h3 v-if="(pageOn > 5)" class="thatsIt">That's Enough!!!</h3>
+        <h3 v-if="pageOn > 5" class="thatsIt">That's Enough!!!</h3>
 
         <Modal :show="isModalOpen" @close="isModalOpen = false" :id="modalId" />
     </div>
@@ -155,13 +212,11 @@ const showModal = (id) => {
 <style scoped>
 .vSelect {
     margin: 1rem;
-    margin-left: 20vw;
-    margin-right: 20vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
     text-align: center;
 
-
-
-    --vs-font-size: 1.25rem;
+    --vs-font-size: 1.5rem;
 
     --vs-controls-color: darkgoldenrod;
     --vs-border-color: darkgoldenrod;
@@ -180,11 +235,10 @@ const showModal = (id) => {
 
     --vs-search-input-color: darkgoldenrod;
 
-    --vs-dropdown-min-width: 60vw;
-    --vs-dropdown-max-width: 60vw;
+    --vs-dropdown-min-width: 80vw;
+    --vs-dropdown-max-width: 80vw;
     --vs-dropdown-min-height: 4rem;
     --vs-dropdown-max-height: 30vh;
-
 
     --vs-dropdown-option--active-bg: darkgoldenrod;
     --vs-dropdown-option--active-color: black;
@@ -230,7 +284,7 @@ const showModal = (id) => {
 }
 
 #trendingOrTop:hover {
-    transition: .2s ease;
+    transition: 0.2s ease;
     background-color: rgb(255, 180, 18);
     color: black;
 }
@@ -267,7 +321,7 @@ const showModal = (id) => {
 }
 
 #moreMoviesButton:hover {
-    transition: .2s ease;
+    transition: 0.2s ease;
     background-color: rgb(210, 154, 12);
     color: black;
 }

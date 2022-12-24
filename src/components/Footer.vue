@@ -9,7 +9,7 @@ const GoToAbout = () => {
 <template>
   <div>
     <div id="footerContainer">
-      <h3 class="title 1" @click="router.push('/search')">By Moosa Mughal</h3>
+      <h3 class="title 1" @click="router.push('/mychoice')">By Moosa Mughal</h3>
       <div class="logo-container">
         <img src="../assets/MMDB-Logo-Gold.png" alt="" @click="router.push('/')">
       </div>
@@ -45,8 +45,19 @@ const GoToAbout = () => {
 
 .title:hover {
   text-decoration: underline;
+  animation: secretLink 1.5s infinite alternate-reverse linear;
 }
-
+@keyframes secretLink {
+  0%{
+    color: gold;
+  }
+  50%{
+    color: yellow;
+  }
+  100%{
+    color: orange;
+  }
+}
 .title2 {
   float: left;
   display: inline;

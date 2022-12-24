@@ -5,7 +5,6 @@ import axios from "axios";
 import { useStore } from "../store/index.js";
 const store = useStore();
 
-
 const props = defineProps({
   show: Boolean,
   id: String
@@ -17,7 +16,7 @@ const getData = async (url, params) => {
   try {
     return await axios.get(url, params);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 const getMovieData = async (movieId) => {
@@ -27,7 +26,7 @@ const getMovieData = async (movieId) => {
       append_to_response: "videos",
     },
   });
-  console.log(movieId);
+  // console.log(movieId);
   allMovieData.value = extraData.data;
   console.log(allMovieData.value);
 };
@@ -42,6 +41,30 @@ const addMovie = () => {
 const removeMovie = () => {
   store.cartMovies.splice(store.cartMovies.findIndex(v => v.id == allMovieData.value.id), 1);
 };
+
+const toHoursAndMinutes = (totalMinutes) => {
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  let pluralHours = null;
+  let pluralMinutes = null;
+
+  if (hours == 1) {
+    pluralHours = "hour"
+  } else {
+    pluralHours = 'hours'
+  }
+
+  if (minutes == 1) {
+    pluralMinutes = "minute"
+  } else {
+    pluralMinutes = 'minutes'
+  }
+
+  const totalTime = `${hours} ${pluralHours} and ${minutes} ${pluralMinutes}`
+  // console.log(totalTime)
+  return totalTime;
+}
 </script>
 
 <template>
@@ -55,6 +78,8 @@ const removeMovie = () => {
             <h3 class="title">{{ allMovieData.title }}</h3>
             <h5 class="tagline" v-if="(allMovieData.tagline != '')">{{ allMovieData.tagline }}</h5>
             <p class="overview">{{ allMovieData.overview }}</p>
+            <!-- <p class="overview">{{ allMovieData.id }}</p> -->
+            <!-- <p class="overview">{{ allMovieData.poster_path }}</p> -->
             <div class="poster">
               <a :href="`${allMovieData.homepage}`" target="_blank">
                 <img :src="`https://image.tmdb.org/t/p/w500${allMovieData.poster_path}`" alt="" />
@@ -109,7 +134,44 @@ const removeMovie = () => {
                 </li>
               </ul>
             </div>
-
+            <div class="extraInfo"
+              :style="{ 'background-image': `https://image.tmdb.org/t/p/w500${allMovieData.backdrop_path}` }">
+              <!-- <img  :src="`https://image.tmdb.org/t/p/w500${allMovieData.backdrop_path}`" alt=""> -->
+              <div class="money">
+                <div v-if="allMovieData.budget != null">
+                  <h3>Budget</h3>
+                  <h4>{{ new Intl.NumberFormat('en-US', {
+                      style: 'currency', currency: 'USD', maximumFractionDigits:
+                        0
+                    }).format(allMovieData.budget)
+                  }} USD</h4>
+                </div>
+                <div v-if="allMovieData.revenue != null">
+                  <h3>Revenue</h3>
+                  <h4>{{ new Intl.NumberFormat('en-US', {
+                      style: 'currency', currency: 'USD', maximumFractionDigits:
+                        0
+                    }).format(allMovieData.revenue)
+                  }} USD</h4>
+                </div>
+              </div>
+              <div class="movieCollection-vote">
+                <div v-if="allMovieData.belongs_to_collection != null">
+                  <h3>Movie Collection</h3>
+                  <h4>{{ allMovieData.belongs_to_collection.name }}</h4>
+                </div>
+                <h3>Vote Info</h3>
+                <h4>Vote Average: {{ (allMovieData.vote_average).toFixed(1) }}</h4>
+                <h4>Vote Count: {{ allMovieData.vote_count }}</h4>
+              </div>
+              <div class="runtime">
+                <h3>Runtime</h3>
+                <h4>{{ toHoursAndMinutes(allMovieData.runtime) }}</h4>
+                <h3>View On IMDB</h3>
+                <a target="_blank" :href="`http://www.imdb.com/title/${allMovieData.imdb_id}`"><h4>Go To IMDB</h4></a>
+                <!-- <img :src="`https://image.tmdb.org/t/p/w500${allMovieData.poster_path}`" alt=""> -->
+              </div>
+            </div>
             <Transition name="cartButton" v-if="id == allMovieData.id">
               <button v-if="(store.cartMovies.filter(movie => movie.id == allMovieData.id).length == 0)"
                 @click="addMovie" class="addorremove-cart-button">Add To Cart</button>
@@ -164,10 +226,10 @@ const removeMovie = () => {
   padding-top: 0%;
   padding: 0.5rem;
   width: 85vw;
-  min-width: 40vw;
+  min-width: 16rem;
   max-width: 95vw;
   height: 70vh;
-  min-height: 40vh;
+  min-height: 16rem;
   max-height: 95vh;
   border: darkgoldenrod 0.5rem solid;
   border-radius: 0.1rem;
@@ -296,6 +358,56 @@ const removeMovie = () => {
 .rating {
   grid-column: span 2;
   text-align: center;
+}
+
+.extraInfo {
+  background-color: transparent;
+  grid-column: span 6;
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.extraInfo img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  grid-column: span 1;
+  overflow: hidden;
+  max-height: 10rem;
+}
+
+.extraInfo h3 {
+  text-decoration: underline;
+}
+
+.money {
+  grid-column: span 1;
+}
+
+.movieCollection-vote {
+  grid-column: span 1;
+}
+
+.runtime {
+  grid-column: span 1;
+}.runtime a{
+  text-decoration: none;
+}.runtime a h4{
+  padding: 5%;
+}.runtime a:hover{
+  text-decoration: underline overline;
+  /* color: black; */
+}
+/* .runtime a h4:hover{
+  background-color: darkgoldenrod;
+  color: black;
+  transition: all 0.1s linear;
+} */
+
+.runtime img {
+  width: 100%;
 }
 
 .x-button {

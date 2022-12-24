@@ -4,6 +4,7 @@ import LoginPage from "../views/LoginPage.vue";
 import PurchasePage from "../views/Purchase.vue";
 import Trending from "../views/Trending.vue";
 import TopRated from "../views/TopRated.vue";
+import MyChoice from "../views/MyChoice.vue";
 import Cart from "../views/Cart.vue";
 import About from "../views/About.vue";
 import Search from "../views/Search.vue";
@@ -26,7 +27,7 @@ const router = createRouter({
     {
       path: '/trending',
       component: Trending
-    },    {
+    }, {
       path: '/toprated',
       component: TopRated
     },
@@ -37,6 +38,10 @@ const router = createRouter({
     {
       path: '/about',
       component: About
+    }, 
+    {
+      path: '/mychoice',
+      component: MyChoice
     },
     {
       path: '/search',

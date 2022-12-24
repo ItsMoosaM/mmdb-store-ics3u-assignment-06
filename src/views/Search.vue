@@ -159,10 +159,11 @@ const showModal = (id) => {
   grid-column: span 5;
   padding: 2%;
   /* Animation */
-  animation-name: glowEffect;
+  animation: glowEffect 1s infinite alternate;
+  /* animation-name: glowEffect;
   animation-duration: 1s;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-direction: alternate; */
 }
 
 ::placeholder {
