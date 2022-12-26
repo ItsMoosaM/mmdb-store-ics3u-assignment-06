@@ -59,7 +59,7 @@ const showModal = (id) => {
 
 <template>
   <div class="store-container">
-    <Header page="Movies" buttonPush="/cart" buttonName="" cart="true" />
+    <Header page="Movies" buttonPush="/cart" buttonName="Cart" />
     <div class="trending-container">
       <button id="trendingOrTop" @click="GoToPage">Get Top Rated</button>
     </div>
@@ -145,13 +145,17 @@ const showModal = (id) => {
   cursor: pointer;
 
   box-shadow: 0px 5px 0rem 0vw rgb(116, 85, 9);
-}#moreMoviesButton:hover {
+}
+
+#moreMoviesButton:hover {
   transition: .2s ease;
   background-color: rgb(210, 154, 12);
   color: black;
-}#moreMoviesButton:active {
+}
+
+#moreMoviesButton:active {
   background-color: rgb(236, 173, 15);
-  border: rgb(255, 193, 37) solid ;
+  border: rgb(255, 193, 37) solid;
   box-shadow: 0px 0px 0rem 0vw rgb(116, 85, 9);
 }
 

@@ -25,8 +25,10 @@ props.cart = false;
         <div id="headerContainer">
             <h1 class="title 1" @click="GoToHome">MMDB Store</h1>
             <h1 id="pageName">{{ props.page }}</h1>
-            
-            <button id="loginButton" @click="GoToPage">{{ props.buttonName }} <i v-if="props.cart" class="fa fa-shopping-cart"></i></button>
+            <div class="button">
+                <button id="loginButton" @click="GoToPage">{{ props.buttonName }}</button>
+                <i v-if="props.cart" class="fa fa-shopping-cart cartIcon" />
+            </div>
         </div>
     </div>
 </template>
@@ -63,15 +65,27 @@ props.cart = false;
     text-align: center;
 }
 
-#loginButton {
+.button {
     background-color: rgb(3, 3, 3);
-    border: rgb(161, 115, 17) 5px solid;
+    /* border: rgb(161, 115, 17) 5px solid; */
     font-size: 1.5rem;
     margin: auto;
     float: right;
     height: 3rem;
     width: 24%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: 4%;
+    border-radius: 1rem;
+}
+
+#loginButton {
+    background-color: rgb(3, 3, 3);
+    border: rgb(161, 115, 17) 5px solid;
+    font-size: 1.5rem;
+    width: 100%;
+    height: 100%;
     border-radius: 1rem;
 }
 
@@ -80,9 +94,17 @@ props.cart = false;
     background-color: rgba(184, 135, 11, 0.2);
     cursor: pointer;
 }
-.fa{
+
+.cartIcon {
     background-color: transparent;
+    /* z-index: 10; */
+    /* display: flex; */
+    position: absolute;
+    margin: auto;
+    pointer-events: none;
+    /* float: right; */
 }
+
 @media screen and (min-width: 600px) {
     .title {
         font-size: 32px;

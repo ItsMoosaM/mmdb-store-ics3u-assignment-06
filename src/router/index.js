@@ -10,10 +10,11 @@ import About from "../views/About.vue";
 import Search from "../views/Search.vue";
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHistory('/mmdb-store-ics3u-assignment-06/'),
   routes: [
     {
       path: '/',
+      name: 'home',
       component: Home
     },
     {
@@ -38,7 +39,7 @@ const router = createRouter({
     {
       path: '/about',
       component: About
-    }, 
+    },
     {
       path: '/mychoice',
       component: MyChoice
@@ -46,7 +47,11 @@ const router = createRouter({
     {
       path: '/search',
       component: Search
-    }
+    },
+    // {
+    //   path: '*',
+    //   component: Home
+    // }
   ],
 });
 

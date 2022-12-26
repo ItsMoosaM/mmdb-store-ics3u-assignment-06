@@ -83,7 +83,7 @@ const clearCart = () => {
 
 <template>
   <div class="store-container">
-    <Header page="My Choice" buttonPush="/cart" buttonName="" cart=true></Header>
+    <Header page="My Choice" buttonPush="/cart" buttonName="Cart"></Header>
     <div class="trending-container">
       <button id="trendingOrTop" @click="router.push('/search')">Search</button>
     </div>

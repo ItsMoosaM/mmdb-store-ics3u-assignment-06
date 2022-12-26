@@ -12,6 +12,8 @@ import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import Modal from "../components/Modal.vue";
 
+
+
 const store = useStore();
 
 let modalId = ref(null);
@@ -165,7 +167,7 @@ const showModal = (id) => {
 
 <template>
     <div class="store-container">
-        <Header page="Movies" buttonPush="/cart" buttonName="" cart="true" />
+        <Header page="Movies" buttonPush="/cart" buttonName="Cart" />
         <div class="trending-container">
             <button id="trendingOrTop" @click="router.push('/trending')">Get Trending</button>
         </div>
@@ -297,6 +299,16 @@ const showModal = (id) => {
 .thatsIt {
     text-align: center;
     margin-top: 1rem;
+}
+
+.cartIcon {
+    background-color: transparent;
+    /* z-index: 10; */
+    /* display: flex; */
+    position: absolute;
+    margin: auto;
+    pointer-events: none;
+    /* float: right; */
 }
 
 #moreMoviesButton {

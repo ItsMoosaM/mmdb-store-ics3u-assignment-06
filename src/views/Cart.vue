@@ -9,17 +9,8 @@ import axios from "axios";
 import Header from "../components/Header.vue"
 import Footer from "../components/Footer.vue"
 import Modal from "../components/Modal.vue";
-
-// import { library } from '@fortawesome/fontawesome-svg-core'
-
-/* import font awesome icon component */
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-
 import { useStore } from "../store/index.js";
 
-// library.add(FontAwesomeIcon)
-// Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 const store = useStore();
 
@@ -83,9 +74,9 @@ const clearCart = () => {
 <template>
   <div class="store-container">
     <Header page="My Cart" buttonPush="/" buttonName="Home"></Header>
-    <Transition name="cartButton" >
-      <div class="clear-container" v-if="store.cartMovies.length>0">
-        <button class="clear-button" @click="clearCart" >Remove All</button>
+    <Transition name="cartButton">
+      <div class="clear-container" v-if="store.cartMovies.length > 0">
+        <button class="clear-button" @click="clearCart">Remove All</button>
       </div>
     </Transition>
     <TransitionGroup name="emptyCart">
@@ -112,9 +103,10 @@ const clearCart = () => {
 </template>
 
 <style scoped>
-.cartButton-enter-active{
+.cartButton-enter-active {
   transition: opacity .5s linear, transform .5s ease;
 }
+
 .cartButton-leave-active {
   transition: opacity .5s linear, transform .5s ease;
 }
@@ -124,25 +116,31 @@ const clearCart = () => {
   opacity: 0;
   transform: scale(0);
 }
+
 .list-move,
 .moviePostersList-enter-active {
   transition: opacity 5s ease, transform 2s ease;
 }
+
 .moviePostersList-leave-active {
   transition: opacity 0.3s ease;
 }
+
 .moviePostersList-enter-from,
 .moviePostersList-leave-to {
   transform: translateX(-100%);
   opacity: 0;
 }
+
 .list-move,
 .emptyCart-enter-active {
   transition: opacity 5s ease, transform 2s ease;
 }
+
 .emptyCart-leave-active {
   transition: opacity 0.3s ease;
 }
+
 .emptyCart-enter-from,
 .emptyCart-leave-to {
   transform: scale(0);
