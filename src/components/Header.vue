@@ -27,7 +27,7 @@ props.cart = false;
             <h1 id="pageName">{{ props.page }}</h1>
             <div class="button">
                 <button id="loginButton" @click="GoToPage">{{ props.buttonName }}</button>
-                <i v-if="props.cart" class="fa fa-shopping-cart cartIcon" />
+                <img v-if="props.cart" src="../assets/cart-shopping-solid.svg" class="cartIcon"/>
             </div>
         </div>
     </div>
@@ -99,6 +99,8 @@ props.cart = false;
     background-color: transparent;
     /* z-index: 10; */
     /* display: flex; */
+    filter: invert(52%) sepia(53%) saturate(3003%) hue-rotate(20deg) brightness(95%) contrast(91%);
+    height: 1.4rem;
     position: absolute;
     margin: auto;
     pointer-events: none;

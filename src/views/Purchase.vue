@@ -167,7 +167,7 @@ const showModal = (id) => {
 
 <template>
     <div class="store-container">
-        <Header page="Movies" buttonPush="/cart" buttonName="Cart" />
+        <Header page="Movies" buttonPush="/cart" buttonName="" cart="true" />
         <div class="trending-container">
             <button id="trendingOrTop" @click="router.push('/trending')">Get Trending</button>
         </div>

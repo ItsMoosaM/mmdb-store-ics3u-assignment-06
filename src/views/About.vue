@@ -9,7 +9,7 @@ import Footer from "../components/Footer.vue"
 
 <template>
   <div>
-    <Header page="About" buttonPush="/" buttonName="Home"></Header>
+    <Header page="About" buttonPush="/" buttonName="" cart="true"></Header>
     <Hero></Hero>
     <Footer></Footer>
   </div>
