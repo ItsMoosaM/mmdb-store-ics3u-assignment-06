@@ -26,8 +26,8 @@ const GoToAbout = () => {
   display: flex;
   justify-content: left;
   align-items: center;
-  left: 0;
-  bottom: 0;
+  left: 0px;
+  bottom: 0px;
   width: 100%;
   height: 4rem;
   margin: auto auto;

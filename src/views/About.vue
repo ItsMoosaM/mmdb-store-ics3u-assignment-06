@@ -11,7 +11,7 @@ import Footer from "../components/Footer.vue"
   <div>
     <Header page="About" buttonPush="/" buttonName="" cart="true"></Header>
     <Hero></Hero>
-    <Footer></Footer>
+    <!-- <Footer></Footer> -->
   </div>
 </template>
 

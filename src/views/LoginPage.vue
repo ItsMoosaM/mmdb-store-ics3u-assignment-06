@@ -12,7 +12,7 @@ import Login from "../components/Login.vue"
     <div>
         <Header page="Login" buttonPush="/" buttonName="Home"></Header>
         <Login></Login>
-        <Footer></Footer>
+        <!-- <Footer></Footer> -->
     </div>
 </template>
 

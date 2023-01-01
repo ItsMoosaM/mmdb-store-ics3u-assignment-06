@@ -95,7 +95,7 @@ const clearCart = () => {
         </li>
       </TransitionGroup>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
     <Modal :show="isModalOpen" @close="isModalOpen = false" :id="modalId" />
   </div>
 </template>

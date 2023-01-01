@@ -74,7 +74,7 @@ const showModal = (id) => {
         </li>
       </TransitionGroup>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
     <button id="moreMoviesButton" @click="get20Movies" v-if="(pageOn <= 5)">More Movies</button>
     <h3 v-if="(pageOn > 5)" class="thatsIt">That's Enough!!!</h3>
     

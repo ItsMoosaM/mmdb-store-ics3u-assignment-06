@@ -5,7 +5,7 @@ import axios from "axios";
 import router from '../router';
 
 import Header from "../components/Header.vue";
-import Footer from "../components/Footer.vue";
+// import Footer from "../components/Footer.vue";
 import Modal from "../components/Modal.vue";
 
 let modalId = ref(null);
@@ -75,7 +75,7 @@ const showModal = (id) => {
         </li>
       </TransitionGroup>
     </div>
-    <Footer />
+    <!-- <Footer /> -->
 
     <Modal :show="isModalOpen" @close="isModalOpen = false" :id="modalId" />
   </div>
