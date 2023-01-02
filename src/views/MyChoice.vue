@@ -83,7 +83,9 @@ const clearCart = () => {
 
 <template>
   <div class="store-container">
-    <Header page="My Choice" buttonPush="/cart" buttonName="" cart="true"></Header>
+    <Header page="My Choice" buttonPush="/cart" buttonName="" >
+                <img  src="../assets/cart-shopping-solid.svg" class="cartIcon"/>
+    </Header>
     <div class="trending-container">
       <button id="trendingOrTop" @click="router.push('/search')">Search</button>
     </div>
@@ -101,6 +103,17 @@ const clearCart = () => {
 </template>
 
 <style scoped>
+.cartIcon {
+    background-color: transparent;
+    /* z-index: 10; */
+    /* display: flex; */
+    filter: invert(52%) sepia(53%) saturate(3003%) hue-rotate(20deg) brightness(95%) contrast(91%);
+    height: 1.4rem;
+    position: absolute;
+    margin: auto;
+    pointer-events: none;
+    /* float: right; */
+}
 .cartButton-enter-active{
   transition: opacity .5s linear, transform .5s ease;
 }

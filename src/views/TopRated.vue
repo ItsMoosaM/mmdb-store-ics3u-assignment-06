@@ -62,7 +62,9 @@ const showModal = (id) => {
 
 <template>
   <div class="store-container">
-    <Header page="Movies" buttonPush="/cart" buttonName="" cart="true" />
+    <Header page="Movies" buttonPush="/cart" buttonName="" >
+                <img  src="../assets/cart-shopping-solid.svg" class="cartIcon"/>
+    </Header>
     <div class="trending-container">
       <button id="trendingOrTop" @click="GoToPage" >Search</button>
     </div>
@@ -83,6 +85,18 @@ const showModal = (id) => {
 </template>
 
 <style scoped>
+.cartIcon {
+    background-color: transparent;
+    /* z-index: 10; */
+    /* display: flex; */
+    filter: invert(52%) sepia(53%) saturate(3003%) hue-rotate(20deg) brightness(95%) contrast(91%);
+    height: 1.4rem;
+    position: absolute;
+    margin: auto;
+    pointer-events: none;
+    /* float: right; */
+}
+
 .trending-container{
   position: absolute;
   margin: auto;

@@ -167,32 +167,34 @@ const showModal = (id) => {
 
 <template>
     <div class="store-container">
-        <Header page="Movies" buttonPush="/cart" buttonName="" cart="true" />
+        <Header page="Movies" buttonPush="/cart" buttonName="">
+            <img src="../assets/cart-shopping-solid.svg" class="cartIcon" />
+        </Header>
         <div class="trending-container">
             <button id="trendingOrTop" @click="router.push('/trending')">Get Trending</button>
         </div>
         <div class="genres-dropdown">
             <vue-select placeholder="Choose a Genre" class="vSelect" label="title" :options="[
-                { title: 'Action', id: 28 },
-                { title: 'Adventure', id: 12 },
-                { title: 'Animation', id: 16 },
-                { title: 'Comedy', id: 35 },
-                { title: 'Crime', id: 80 },
-                { title: 'Documentary', id: 99 },
-                { title: 'Drama', id: 18 },
-                { title: 'Family', id: 10751 },
-                { title: 'Fantasy', id: 14 },
-                { title: 'History', id: 36 },
-                { title: 'Horror', id: 27 },
-                { title: 'Music', id: 10402 },
-                { title: 'Mystery', id: 9648 },
-                { title: 'Romance', id: 10749 },
-                { title: 'Sci-Fi', id: 878 },
-                { title: 'TV Movie', id: 10770 },
-                { title: 'Thriller', id: 53 },
-                { title: 'War', id: 10752 },
-                { title: 'Western', id: 37 },
-            ]" v-model="selectedOption"></vue-select>
+    { title: 'Action', id: 28 },
+    { title: 'Adventure', id: 12 },
+    { title: 'Animation', id: 16 },
+    { title: 'Comedy', id: 35 },
+    { title: 'Crime', id: 80 },
+    { title: 'Documentary', id: 99 },
+    { title: 'Drama', id: 18 },
+    { title: 'Family', id: 10751 },
+    { title: 'Fantasy', id: 14 },
+    { title: 'History', id: 36 },
+    { title: 'Horror', id: 27 },
+    { title: 'Music', id: 10402 },
+    { title: 'Mystery', id: 9648 },
+    { title: 'Romance', id: 10749 },
+    { title: 'Sci-Fi', id: 878 },
+    { title: 'TV Movie', id: 10770 },
+    { title: 'Thriller', id: 53 },
+    { title: 'War', id: 10752 },
+    { title: 'Western', id: 37 },
+]" v-model="selectedOption"></vue-select>
             <button id="moreMoviesButton" @click="showGenre()">Get Movies</button>
         </div>
         <div class="images">
@@ -212,6 +214,17 @@ const showModal = (id) => {
 </template>
 
 <style scoped>
+.cartIcon {
+    background-color: transparent;
+    /* z-index: 10; */
+    /* display: flex; */
+    filter: invert(52%) sepia(53%) saturate(3003%) hue-rotate(20deg) brightness(95%) contrast(91%);
+    height: 1.4rem;
+    position: absolute;
+    margin: auto;
+    pointer-events: none;
+    /* float: right; */
+}
 .vSelect {
     margin: 1rem;
     margin-left: 10vw;
