@@ -48,10 +48,10 @@ const router = createRouter({
       path: '/search',
       component: Search
     },
-    // {
-    //   path: '*',
-    //   component: Home
-    // }
+    {
+      path: '/:pathMatch(.*)',
+      component: Search
+    }
   ],
 });
 
