@@ -27,7 +27,7 @@ props.cart = false;
             <h1 id="pageName">{{ props.page }}</h1>
             <div class="button">
                 <button id="loginButton" @click="GoToPage">{{ props.buttonName }}</button>
-                <img v-if="props.cart" src="../assets/cart-shopping-solid.svg" class="cartIcon"/>
+                <img v-show="props.cart" src="../assets/cart-shopping-solid.svg" class="cartIcon"/>
             </div>
         </div>
     </div>
