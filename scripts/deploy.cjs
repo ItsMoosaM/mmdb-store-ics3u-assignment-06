@@ -1,4 +1,4 @@
-// Run With npm run gh-pages-deploy
+// Run With npm run deploy
 const execa = require("execa");
 const fs = require("fs");
 

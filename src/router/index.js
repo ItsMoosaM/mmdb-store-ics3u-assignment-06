@@ -15,38 +15,65 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      meta: {
+        title: "MMDB Store"
+      }
     },
     {
       path: '/login',
-      component: LoginPage
+      component: LoginPage,
+      meta: {
+        title: "Login"
+      }
     },
     {
       path: '/purchase',
-      component: PurchasePage
+      component: PurchasePage,
+      meta: {
+        title: "Genres"
+      }
     },
     {
       path: '/trending',
-      component: Trending
+      component: Trending,
+      meta: {
+        title: "Trending"
+      }
     }, {
       path: '/toprated',
-      component: TopRated
+      component: TopRated,
+      meta: {
+        title: "Top Rated"
+      }
     },
     {
       path: '/cart',
-      component: Cart
+      component: Cart,
+      meta: {
+        title: "My Cart"
+      }
     },
     {
       path: '/about',
-      component: About
+      component: About,
+      meta: {
+        title: "About"
+      }
     },
     {
       path: '/mychoice',
-      component: MyChoice
+      component: MyChoice,
+      meta: {
+        title: "My Choice"
+      }
     },
     {
       path: '/search',
-      component: Search
+      component: Search,
+      meta: {
+        title: "Search"
+      }
     },
     {
       path: '/:pathMatch(.*)',
@@ -54,5 +81,15 @@ const router = createRouter({
     }
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.title == "MMDB Store") {
+    document.title = to.meta.title;
+    next()
+  } else {
+    document.title = `MMDB Store | ${to.meta.title}`;
+    next();
+  }
+})
 
 export default router;

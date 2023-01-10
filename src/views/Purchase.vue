@@ -175,27 +175,27 @@ const showModal = (id) => {
         </div>
         <div class="genres-dropdown">
             <vue-select placeholder="Choose a Genre" class="vSelect" label="title" :options="[
-    { title: 'Action', id: 28 },
-    { title: 'Adventure', id: 12 },
-    { title: 'Animation', id: 16 },
-    { title: 'Comedy', id: 35 },
-    { title: 'Crime', id: 80 },
-    { title: 'Documentary', id: 99 },
-    { title: 'Drama', id: 18 },
-    { title: 'Family', id: 10751 },
-    { title: 'Fantasy', id: 14 },
-    { title: 'History', id: 36 },
-    { title: 'Horror', id: 27 },
-    { title: 'Music', id: 10402 },
-    { title: 'Mystery', id: 9648 },
-    { title: 'Romance', id: 10749 },
-    { title: 'Sci-Fi', id: 878 },
-    { title: 'TV Movie', id: 10770 },
-    { title: 'Thriller', id: 53 },
-    { title: 'War', id: 10752 },
-    { title: 'Western', id: 37 },
-]" v-model="selectedOption"></vue-select>
-            <button id="moreMoviesButton" @click="showGenre()">Get Movies</button>
+                { title: 'Action', id: 28 },
+                { title: 'Adventure', id: 12 },
+                { title: 'Animation', id: 16 },
+                { title: 'Comedy', id: 35 },
+                { title: 'Crime', id: 80 },
+                { title: 'Documentary', id: 99 },
+                { title: 'Drama', id: 18 },
+                { title: 'Family', id: 10751 },
+                { title: 'Fantasy', id: 14 },
+                { title: 'History', id: 36 },
+                { title: 'Horror', id: 27 },
+                { title: 'Music', id: 10402 },
+                { title: 'Mystery', id: 9648 },
+                { title: 'Romance', id: 10749 },
+                { title: 'Sci-Fi', id: 878 },
+                { title: 'TV Movie', id: 10770 },
+                { title: 'Thriller', id: 53 },
+                { title: 'War', id: 10752 },
+                { title: 'Western', id: 37 },
+            ]" v-model="selectedOption"></vue-select>
+            <button id="getGenreButton" @click="showGenre()">Get Movies</button>
         </div>
         <div class="images">
             <TransitionGroup name="moviePostersList">
@@ -206,7 +206,7 @@ const showModal = (id) => {
             </TransitionGroup>
         </div>
         <!-- <Footer /> -->
-        <!-- <button id="moreMoviesButton" @click="get20Movies" v-if="(pageOn <= 5)">More Movies</button> -->
+        <!-- <button id="getGenreButton" @click="get20Movies" v-if="(pageOn <= 5)">More Movies</button> -->
         <h3 v-if="pageOn > 5" class="thatsIt">That's Enough!!!</h3>
 
         <Modal :show="isModalOpen" @close="isModalOpen = false" :id="modalId" />
@@ -225,6 +225,7 @@ const showModal = (id) => {
     pointer-events: none;
     /* float: right; */
 }
+
 .vSelect {
     margin: 1rem;
     margin-left: 10vw;
@@ -324,7 +325,7 @@ const showModal = (id) => {
     /* float: right; */
 }
 
-#moreMoviesButton {
+#getGenreButton {
     display: flex;
     margin-top: 1rem;
     justify-content: center;
@@ -345,13 +346,13 @@ const showModal = (id) => {
     box-shadow: 0px 5px 0rem 0vw rgb(116, 85, 9);
 }
 
-#moreMoviesButton:hover {
+#getGenreButton:hover {
     transition: 0.2s ease;
     background-color: rgb(210, 154, 12);
     color: black;
 }
 
-#moreMoviesButton:active {
+#getGenreButton:active {
     background-color: rgb(236, 173, 15);
     border: rgb(255, 193, 37) solid;
     box-shadow: 0px 0px 0rem 0vw rgb(116, 85, 9);
