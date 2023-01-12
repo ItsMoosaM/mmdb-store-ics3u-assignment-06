@@ -42,29 +42,6 @@ const removeMovie = () => {
   store.cartMovies.splice(store.cartMovies.findIndex(v => v.id == allMovieData.value.id), 1);
 };
 
-const toHoursAndMinutes = (totalMinutes) => {
-  const hours = Math.floor(totalMinutes / 60);
-  const minutes = totalMinutes % 60;
-
-  let pluralHours = null;
-  let pluralMinutes = null;
-
-  if (hours == 1) {
-    pluralHours = "hour"
-  } else {
-    pluralHours = 'hours'
-  }
-
-  if (minutes == 1) {
-    pluralMinutes = "minute"
-  } else {
-    pluralMinutes = 'minutes'
-  }
-
-  const totalTime = `${hours} ${pluralHours} and ${minutes} ${pluralMinutes}`
-  // console.log(totalTime)
-  return totalTime;
-}
 </script>
 
 <template>
@@ -166,7 +143,7 @@ const toHoursAndMinutes = (totalMinutes) => {
               </div>
               <div class="runtime">
                 <h3>Runtime</h3>
-                <h4>{{ toHoursAndMinutes(allMovieData.runtime) }}</h4>
+                <h4>{{ store.toHoursAndMinutes(allMovieData.runtime) }}</h4>
                 <h3>View On IMDB</h3>
                 <a target="_blank" :href="`http://www.imdb.com/title/${allMovieData.imdb_id}`"><h4>Go To IMDB</h4></a>
                 <!-- <img :src="`https://image.tmdb.org/t/p/w500${allMovieData.poster_path}`" alt=""> -->

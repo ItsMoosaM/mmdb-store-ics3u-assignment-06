@@ -14,7 +14,7 @@ import Footer from "./components/Footer.vue";
 
 <style scoped>
 .fade-enter-active {
-	animation: coming 0.8s;
+	animation: coming 1s;
 	animation-delay: 0.2s;
 	opacity: 0;
 }

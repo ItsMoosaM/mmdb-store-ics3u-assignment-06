@@ -4,8 +4,9 @@ export const useStore = defineStore('store;', {
   state: () => {
     return {
       cartMovies: [
-        // {id: 436270, poster_path:"/pFlaoHTZeyNkG83vxsAJiGzfSsa.jpg"},
-        // {id: 76600, poster_path:"/94xxm5701CzOdJdUEdIuwqZaowx.jpg"}
+        // {id: 9502, poster_path:"/xCn3VOST64XpOA8x0gaQkQiZtZY.jpg", title:"Kung Fu Panda"},
+        // {id: 49444, poster_path:"/mtqqD00vB4PGRt20gWtGqFhrkd0.jpg", title:"Kung Fu Panda 2"},
+        // {id: 324857, poster_path:"/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg", title:"Spiderverse"},
       ],
       myChoice: [
         {id: 9502, poster_path:"/xCn3VOST64XpOA8x0gaQkQiZtZY.jpg"},
@@ -65,6 +66,29 @@ export const useStore = defineStore('store;', {
   actions: {
     log() {
       console.log(this.genres)
+    },
+    toHoursAndMinutes(totalMinutes) {
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+    
+      let pluralHours = null;
+      let pluralMinutes = null;
+    
+      if (hours == 1) {
+        pluralHours = "hour"
+      } else {
+        pluralHours = 'hours'
+      }
+    
+      if (minutes == 1) {
+        pluralMinutes = "minute"
+      } else {
+        pluralMinutes = 'minutes'
+      }
+    
+      const totalTime = `${hours} ${pluralHours} and ${minutes} ${pluralMinutes}`
+      // console.log(totalTime)
+      return totalTime;
     }
   },
 });
