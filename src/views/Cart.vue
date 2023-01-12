@@ -104,12 +104,12 @@ const removeMovie = (id) => {
 
         <div class="toggle-buttons-container">
           <!-- <button @click="changeGridLong" :class="{ active: longIsActiveButton }" class="toggle-grid-style"> -->
-          <img @click="changeGridLong" src="../assets/Grid Long.png" :class="{ active: longIsActiveButton }"
+          <img @click="changeGridLong" src="../assets/GridLong.png" :class="{ active: longIsActiveButton }"
             class="toggle-grid-style" alt="">
           <!-- </button> -->
           <!-- <button @click="changeGridCompact" :class="{ active: compactIsActiveButton }" class="toggle-grid-style"> -->
           <img @click="changeGridCompact" :class="{ active: compactIsActiveButton }" class="toggle-grid-style"
-            src="../assets/Grid Compact.png" alt="">
+            src="../assets/GridCompact.png" alt="">
           <!-- </button> -->
         </div>
       </div>
