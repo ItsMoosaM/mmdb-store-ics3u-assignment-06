@@ -40,7 +40,7 @@ const getData = async (url, params) => {
   try {
     return await axios.get(url, params);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -56,23 +56,23 @@ const getCartMovies = async (movieId) => {
   });
   // console.log(movieId);
   allMovieData.value = extraData.data;
-  console.log(allMovieData.value);
+  // console.log(allMovieData.value);
 
   movieTrending.value.length += 1;
   movieTrending.value.push(allMovieData);
-  console.log(movieTrending)
+  // console.log(movieTrending)
 };
 
 const addCartItems = () => {
   store.myChoice.forEach(choice =>
     getCartMovies(choice));
-  console.log(movieTrending)
+  // console.log(movieTrending)
 
 }
 addCartItems()
 
 const showModal = (id) => {
-  console.log(id)
+  // console.log(id)
   modalId.value = `${id}`;
   isModalOpen.value = true;
 }

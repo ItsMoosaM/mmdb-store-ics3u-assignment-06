@@ -33,7 +33,7 @@ const getData = async (url, params) => {
     try {
         return await axios.get(url, params);
     } catch (error) {
-        console.log(error);
+        // console.log(error);
     }
 };
 const getGenres = async (id) => {
@@ -82,7 +82,7 @@ const getAllGenres = async () => {
     store.Thriller = await getGenres(53);
     store.War = await getGenres(10752);
     store.Western = await getGenres(37);
-    console.log('On Load')
+    // console.log('On Load')
 }
 
 if (!store.IsDataLoaded) {
@@ -159,7 +159,7 @@ const showGenre = () => {
 }
 
 const showModal = (id) => {
-    console.log(id)
+    // console.log(id)
     modalId.value = `${id}`;
     isModalOpen.value = true;
 }

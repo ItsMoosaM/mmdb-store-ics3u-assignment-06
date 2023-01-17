@@ -28,7 +28,7 @@ const getMovieData = async (movieId) => {
   });
   // console.log(movieId);
   allMovieData.value = extraData.data;
-  console.log(allMovieData.value);
+  // console.log(allMovieData.value);
 };
 
 watchEffect(() => {

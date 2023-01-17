@@ -24,7 +24,7 @@ const getData = async (url, params) => {
   try {
     return await axios.get(url, params);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 const get20Movies = async () => {
@@ -39,13 +39,13 @@ const get20Movies = async () => {
     })
   ).data.results;
   pageOn.value++
-  console.log(movieData);
+  // console.log(movieData);
   if (movieTrending.value == null) {
     movieTrending.value = movieData;
   } else {
     movieTrending.value = movieTrending.value.concat(movieData);
   }
-  console.log(movieTrending);
+  // console.log(movieTrending);
 };
 get20Movies();
 
@@ -54,7 +54,7 @@ const GoToPage = () => {
 }
 
 const showModal = (id) => {
-  console.log(id)
+  // console.log(id)
   modalId.value = `${id}`;
   isModalOpen.value = true;
 }
