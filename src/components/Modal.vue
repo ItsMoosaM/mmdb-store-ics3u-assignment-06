@@ -86,7 +86,9 @@ const removeMovie = () => {
             <div class="productionCompanies">
               <h3>Production Companies</h3>
               <ul>
-                <li>
+              <br>
+              <h4 v-if="allMovieData.production_companies.length == 0">Not Available</h4>
+                <li v-if="allMovieData.production_companies.length > 0">
                   {{ allMovieData.production_companies.at(0).name }}
                 </li>
                 <li v-if="allMovieData.production_companies.length > 1">
@@ -230,7 +232,7 @@ const removeMovie = () => {
   height: 100%;
   overflow: overlay;
   grid-template-columns: repeat(6, 1fr);
-  row-gap: 0.4rem;
+  row-gap: 0.8rem;
 }
 
 .title {
@@ -330,6 +332,11 @@ const removeMovie = () => {
   line-height: 150%;
   list-style: square;
   list-style-position: inside;
+}.productionCompanies h4 {
+  color: gold;
+  text-decoration: underline overline;
+  /* border: darkgoldenrod solid 4px; */
+  font-size: 110%;
 }
 
 .rating {

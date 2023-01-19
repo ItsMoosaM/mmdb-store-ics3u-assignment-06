@@ -137,6 +137,7 @@ const removeMovie = (id) => {
       <div v-if="store.cartMovies.length != 0 && !isCompactGrid" class="cart-long-grid">
         <TransitionGroup name="list-remove">
           <div class="item-container" v-for="movies in store.cartMovies" :key="movies">
+            <!-- <img :src="`https://image.tmdb.org/t/p/w500${movies.backdrop_path}`" alt="" class="backdropPoster"> -->
             <img class="moviePosters" :src="`https://image.tmdb.org/t/p/w500${movies.poster_path}`" :alt="movies.title"
               :props.movieId="`${movies.id}`" @click="showModal(movies.id)" />
             <h1>{{ movies.title }} {{ getYear(`${movies.release_date }`) }}
@@ -154,15 +155,27 @@ const removeMovie = (id) => {
 </template>
 
 <style scoped>
+.backdropPoster {
+  position: absolute;
+  width: 100%;
+  aspect-ratio: 3/2;
+  height: 12rem;
+  
+  grid-column: span 5;
+  grid-row: span 3;
+}
+
 .list-remove-enter-active,
 .list-remove-leave-active {
   transition: all 0.5s ease;
 }
+
 .list-remove-enter-from,
 .list-remove-leave-to {
   opacity: 0;
   transform: translateX(-100px);
 }
+
 .removeButton {
   margin-right: .5rem;
   margin-bottom: .5rem;
@@ -192,7 +205,7 @@ const removeMovie = (id) => {
 
 .item-container {
   background-color: rgba(184, 135, 11, 0.734);
-  height: 9rem;
+  height: 10rem;
   grid-column: span 1;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -205,7 +218,8 @@ const removeMovie = (id) => {
   margin: auto;
   grid-column: span 1;
   grid-row: span 3;
-  height: 8rem;
+  height: 9rem;
+  aspect-ratio: 2/3;
 }
 
 .item-container h1 {
@@ -264,7 +278,8 @@ const removeMovie = (id) => {
 
 
 
-.moviePostersCompact-enter-active, .moviePostersCompact-leave-active {
+.moviePostersCompact-enter-active,
+.moviePostersCompact-leave-active {
   transition: opacity 2s ease, transform 2s ease;
 }
 
