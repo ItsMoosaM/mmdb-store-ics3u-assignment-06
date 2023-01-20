@@ -91,7 +91,7 @@ props.cart = false;
 
 #loginButton:hover {
     transition: .3s ease;
-    background-color: rgba(184, 135, 11, 0.2);
+    background-color: rgba(184, 135, 11, 0.3);
     cursor: pointer;
 }
 

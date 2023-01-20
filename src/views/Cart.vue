@@ -394,7 +394,8 @@ const removeMovie = (id) => {
 .text-overlay {
   border: darkgoldenrod solid 5px;
   text-align: center;
-  padding: 2rem;
+  font-size: 140%;
+  padding: 5rem;
 }
 
 .trending-container {

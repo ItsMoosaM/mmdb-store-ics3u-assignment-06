@@ -80,14 +80,13 @@ const removeMovie = () => {
               <h4>{{ allMovieData.release_date }}</h4>
               <h3 v-if="(allMovieData.production_countries.length != 0)">Country</h3>
               <h4 v-if="(allMovieData.production_countries.length != 0)">{{
-                  allMovieData.production_countries.at(0).name
+                allMovieData.production_countries.at(0).name
               }}</h4>
             </div>
             <div class="productionCompanies">
               <h3>Production Companies</h3>
               <ul>
-              <br>
-              <h4 v-if="allMovieData.production_companies.length == 0">Not Available</h4>
+                <h4 v-if="allMovieData.production_companies.length == 0">Not Available</h4>
                 <li v-if="allMovieData.production_companies.length > 0">
                   {{ allMovieData.production_companies.at(0).name }}
                 </li>
@@ -119,7 +118,8 @@ const removeMovie = () => {
               <div class="money">
                 <div v-if="allMovieData.budget != null">
                   <h3>Budget</h3>
-                  <h4>{{ new Intl.NumberFormat('en-US', {
+                  <h4>{{
+                    new Intl.NumberFormat('en-US', {
                       style: 'currency', currency: 'USD', maximumFractionDigits:
                         0
                     }).format(allMovieData.budget)
@@ -127,7 +127,8 @@ const removeMovie = () => {
                 </div>
                 <div v-if="allMovieData.revenue != null">
                   <h3>Revenue</h3>
-                  <h4>{{ new Intl.NumberFormat('en-US', {
+                  <h4>{{
+                    new Intl.NumberFormat('en-US', {
                       style: 'currency', currency: 'USD', maximumFractionDigits:
                         0
                     }).format(allMovieData.revenue)
@@ -147,7 +148,9 @@ const removeMovie = () => {
                 <h3>Runtime</h3>
                 <h4>{{ store.toHoursAndMinutes(allMovieData.runtime) }}</h4>
                 <h3>View On IMDB</h3>
-                <a target="_blank" :href="`http://www.imdb.com/title/${allMovieData.imdb_id}`"><h4>Go To IMDB</h4></a>
+                <a target="_blank" :href="`http://www.imdb.com/title/${allMovieData.imdb_id}`">
+                  <h4>Go To IMDB</h4>
+                </a>
                 <!-- <img :src="`https://image.tmdb.org/t/p/w500${allMovieData.poster_path}`" alt=""> -->
               </div>
             </div>
@@ -208,6 +211,7 @@ const removeMovie = () => {
   min-width: 16rem;
   max-width: 95vw;
   height: 70vh;
+  aspect-ratio: 1/1;
   min-height: 16rem;
   max-height: 95vh;
   border: darkgoldenrod 0.5rem solid;
@@ -332,7 +336,9 @@ const removeMovie = () => {
   line-height: 150%;
   list-style: square;
   list-style-position: inside;
-}.productionCompanies h4 {
+}
+
+.productionCompanies h4 {
   color: gold;
   text-decoration: underline overline;
   /* border: darkgoldenrod solid 4px; */
@@ -376,14 +382,21 @@ const removeMovie = () => {
 
 .runtime {
   grid-column: span 1;
-}.runtime a{
+}
+
+.runtime a {
   text-decoration: none;
-}.runtime a h4{
+}
+
+.runtime a h4 {
   padding: 5%;
-}.runtime a:hover{
+}
+
+.runtime a:hover {
   text-decoration: underline overline;
   /* color: black; */
 }
+
 /* .runtime a h4:hover{
   background-color: darkgoldenrod;
   color: black;
