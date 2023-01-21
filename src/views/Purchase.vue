@@ -194,7 +194,7 @@ const showModal = (id) => {
                 { title: 'Thriller', id: 53 },
                 { title: 'War', id: 10752 },
                 { title: 'Western', id: 37 },
-            ]" v-model="selectedOption"></vue-select>
+            ]" v-model="selectedOption" ></vue-select>
             <button id="getGenreButton" @click="showGenre()">Get Movies</button>
         </div>
         <div class="images">

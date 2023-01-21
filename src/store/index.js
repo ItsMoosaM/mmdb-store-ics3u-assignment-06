@@ -12,6 +12,7 @@ export const useStore = defineStore('store;', {
         {id: 9502, poster_path:"/xCn3VOST64XpOA8x0gaQkQiZtZY.jpg"},
         {id: 49444, poster_path:"/mtqqD00vB4PGRt20gWtGqFhrkd0.jpg"},
         {id: 324857, poster_path:"/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg"},
+        {id: 315162, poster_path:"/kuf6dutpsT0vSVehic3EZIqkOBt.jpg"},
         {id: 272, poster_path:"/8RW2runSEc34IwKN2D1aPcJd2UL.jpg"},
         {id: 155, poster_path:"/qJ2tW6WMUDux911r6m7haRef0WH.jpg"},
         {id: 49026, poster_path:"/hrJUZ5Jo2G3Czy391evhlxgbEdJ.jpg"},
@@ -29,16 +30,15 @@ export const useStore = defineStore('store;', {
         {id: 274862, poster_path:"/vUo0pNXGhp2ffTJxiStWt6fHL7F.jpg"},
         {id: 137106, poster_path:"/9klB7qKC9aCeGyyM4uU5hSA6xDV.jpg"},
         {id: 330459, poster_path:"/i0yw1mFbB7sNGHCs7EXZPzFkdA1.jpg"},
+        {id: 245891, poster_path:"/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"},
         {id: 329, poster_path:"/b1xCNnyrPebIc7EWNZIa6jhb1Ww.jpg"},
         {id: 438631, poster_path:"/d5NXSklXo0qyIYkgV94XAgMIckC.jpg"},
-        {id: 98, poster_path:"/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg"},
         {id: 1883, poster_path:"/zXn95Y4iZcab4A6bdXgXYxT8eOo.jpg"},
-        {id: 1726, poster_path:"/78lPtwv72eTNqFW9COBYI0dWDJa.jpg"},
+        {id: 603, poster_path:"/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"},
         {id: 299534, poster_path:"/or06FN3Dka5tukK1e9sl16pB3iy.jpg"},
-        {id: 1495, poster_path:"/uk55nBEFIQFveIiy9jvLGiVtk4h.jpg"},
         {id: 475557, poster_path:"/udDclJoHjfjb8Ekgsd4FDteOkCU.jpg"},
         {id: 557, poster_path:"/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg"},
-        {id: 245891, poster_path:"/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"},
+        {id: 1495, poster_path:"/uk55nBEFIQFveIiy9jvLGiVtk4h.jpg"},
       ],      
       //Stores Data on Load
       IsDataLoaded: false,
@@ -89,6 +89,10 @@ export const useStore = defineStore('store;', {
       const totalTime = `${hours} ${pluralHours} and ${minutes} ${pluralMinutes}`
       // console.log(totalTime)
       return totalTime;
+    },
+    getYear (date) {
+      const year = `(${date.slice(0, 4)})`
+      return year
     }
   },
 });

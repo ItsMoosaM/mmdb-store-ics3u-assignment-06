@@ -52,7 +52,7 @@ const removeMovie = () => {
         <button @click="$emit('close')" class="x-button">X</button>
         <div class="modal-content-container">
           <div class="modal-info-container">
-            <h3 class="title">{{ allMovieData.title }}</h3>
+            <h3 class="title">{{ allMovieData.title }} {{ store.getYear(allMovieData.release_date) }}</h3>
             <h5 class="tagline" v-if="(allMovieData.tagline != '')">{{ allMovieData.tagline }}</h5>
             <p class="overview">{{ allMovieData.overview }}</p>
             <!-- <p class="overview">{{ allMovieData.id }}</p> -->
@@ -125,6 +125,7 @@ const removeMovie = () => {
                     }).format(allMovieData.budget)
                   }} USD</h4>
                 </div>
+                <br>
                 <div v-if="allMovieData.revenue != null">
                   <h3>Revenue</h3>
                   <h4>{{
@@ -140,6 +141,7 @@ const removeMovie = () => {
                   <h3>Movie Collection</h3>
                   <h4>{{ allMovieData.belongs_to_collection.name }}</h4>
                 </div>
+                <br>
                 <h3>Vote Info</h3>
                 <h4>Vote Average: {{ (allMovieData.vote_average).toFixed(1) }}</h4>
                 <h4>Vote Count: {{ allMovieData.vote_count }}</h4>
@@ -147,6 +149,7 @@ const removeMovie = () => {
               <div class="runtime">
                 <h3>Runtime</h3>
                 <h4>{{ store.toHoursAndMinutes(allMovieData.runtime) }}</h4>
+                <br>
                 <h3>View On IMDB</h3>
                 <a target="_blank" :href="`http://www.imdb.com/title/${allMovieData.imdb_id}`">
                   <h4>Go To IMDB</h4>
@@ -169,6 +172,9 @@ const removeMovie = () => {
 </template>
 
 <style scoped>
+h3{
+  padding-bottom: 2%;
+}
 .cartButton-enter-active,
 .cartButton-leave-active {
   transition: opacity 1s linear, transform .5s ease;
@@ -208,7 +214,7 @@ const removeMovie = () => {
   padding-top: 0%;
   padding: 0.5rem;
   width: 85vw;
-  min-width: 16rem;
+  min-width: 20rem;
   max-width: 95vw;
   height: 70vh;
   aspect-ratio: 1/1;
@@ -237,6 +243,9 @@ const removeMovie = () => {
   overflow: overlay;
   grid-template-columns: repeat(6, 1fr);
   row-gap: 0.8rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 }
 
 .title {
@@ -279,6 +288,9 @@ const removeMovie = () => {
 .tagline {
   grid-column: span 6;
   text-align: center;
+  margin: auto;
+  width: 80%;
+  font-size: 110%;
   padding-bottom: 1%;
   padding-top: 1%;
   border: 4px double darkgoldenrod;
@@ -318,6 +330,7 @@ const removeMovie = () => {
 
 .release-date-and-country {
   grid-column: span 2;
+  padding-bottom: 1%;
   text-align: center;
 }
 
@@ -329,11 +342,14 @@ const removeMovie = () => {
 .productionCompanies {
   grid-column: span 2;
   text-align: center;
-
+}
+.productionCompanies h3{
+  text-decoration: underline;
 }
 
 .productionCompanies li {
   line-height: 150%;
+  padding-bottom: .5%;
   list-style: square;
   list-style-position: inside;
 }
@@ -413,6 +429,8 @@ const removeMovie = () => {
   background: none;
   border: none;
   cursor: pointer;
+  padding-left: 5px;
+  padding-top: 4px;
 }
 
 .x-button:hover {

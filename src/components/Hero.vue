@@ -53,70 +53,102 @@ const router = useRouter();
   object-fit: cover;
 }
 
+@keyframes textMarvel {
+  0% {
+    color: darkgoldenrod;
+    border-color: darkgoldenrod;
+    box-shadow: darkgoldenrod;
+  }
+
+  25% {
+    color: yellow;
+    border-color: yellow;
+    box-shadow: yellow;
+  }
+
+  75% {
+    color: orange;
+    border-color: orange;
+    box-shadow: orange;
+  }
+
+  100% {
+    color: gold;
+    border-color: gold;
+    box-shadow: gold;
+  }
+}
+
 .text-overlay {
   position: absolute;
-  padding: 1.8rem;
+  padding: 2.4rem;
   font-size: 4vw;
   background-color: transparent;
   border-radius: 1rem;
   animation: 1s linear textGlow 10s infinite alternate;
 }
+
 @keyframes textGlow {
-  /* 0% {
-    box-shadow: 0px 0px 0rem 0vw darkgoldenrod, inset 0px 0px 0rem 0vw darkgoldenrod;
-  }
-  30%{
-    box-shadow: 0px 0px 0rem 0vw darkgoldenrod, inset 0px 0px 0rem 0vw darkgoldenrod;
-  } */
-  0%{
+  0% {
     box-shadow: 0px 0px .1rem 0vw darkgoldenrod, inset 0px 0px .1rem 0vw darkgoldenrod;
   }
+
   100% {
     box-shadow: 0px 0px 1rem 1vw darkgoldenrod, inset 0px 0px 1rem .5vw darkgoldenrod;
   }
 }
-.text-overlay h1{
+
+.text-overlay h1 {
   font-size: 360%;
   text-decoration: overline underline;
   background-color: transparent;
   line-height: 150%;
   opacity: 0%;
-  animation: 2.5s linear 3.5s textFade forwards;
-}.text-overlay h2{
+  animation: 2.5s linear 3.5s textFade forwards, textMarvel 1s linear 0s infinite alternate forwards;
+}
+
+.text-overlay h2 {
   background-color: transparent;
   line-height: 150%;
   opacity: 0%;
-  animation: 2s linear 1.5s textFade forwards;
-}.text-overlay h6{
+  animation: 2s linear 1.5s textFade forwards, textMarvel 1s linear 0s infinite alternate forwards;
+}
+
+.text-overlay h6 {
   font-size: 150%;
   text-decoration: none;
   background-color: transparent;
   line-height: 150%;
   opacity: 0%;
-  animation: 2s linear 6s textFade forwards;
-}.text-overlay button{
+  animation: 2s linear 6s textFade forwards, textMarvel 1s linear 0s infinite alternate forwards;
+}
+
+.text-overlay button {
   font-size: 170%;
   background-color: transparent;
   border: solid 3px darkgoldenrod;
   line-height: 150%;
   opacity: 0%;
-  animation: 2s linear 6s textFade forwards;
+  animation: 2s linear 6s textFade forwards, textMarvel 1s linear 0s infinite alternate forwards;
   margin-top: 2%;
-  padding: 0px 5% 0px 5%;
-  border-radius: 0.05rem;
-}.text-overlay button:hover{
+  width: 25vw;
+  /* padding: 0px 5% 0px 5%; */
+  border-radius: 999rem;
+}
+
+.text-overlay button:hover {
   transition: .1s ease;
   font-size: 170%;
   background-color: rgba(184, 135, 11, 0.2);
   cursor: pointer;
 }
 
-
 @keyframes textFade {
   from {
     opacity: 0%;
     transform: scale(0.90);
   }
+
   to {
     opacity: 100%;
     transform: scale(1);
@@ -128,8 +160,8 @@ img {
   height: 100%;
 }
 
-@media screen and (min-width: 500px){
-  .text-overlay{
+@media screen and (min-width: 500px) {
+  .text-overlay {
     font-size: 20px;
   }
 }
