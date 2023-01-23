@@ -1,6 +1,6 @@
 <script setup>
+// 
 import { ref } from "vue";
-import { useRouter } from "vue-router";
 import axios from "axios";
 import router from '../router';
 
@@ -12,17 +12,12 @@ import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import Modal from "../components/Modal.vue";
 
-
-
 const store = useStore();
-
 let modalId = ref(null);
 let isModalOpen = ref(false);
 let allMovieData = ref(null);
 let pageOn = ref(1);
-
 let selectedOption = ref(null);
-
 let movieTrending = ref(null);
 
 const props = defineProps({
@@ -36,6 +31,7 @@ const getData = async (url, params) => {
         // console.log(error);
     }
 };
+
 const getGenres = async (id) => {
     const movieData = (
         await getData("https://api.themoviedb.org/3/discover/movie?", {
@@ -51,16 +47,8 @@ const getGenres = async (id) => {
 
     let mov = movieData
     return mov;
-    //   pageOn.value++
-    // console.log(movieData);
-    // console.log(selectedOption.value.title)
-    //   if (movieTrending.value == null) {
-    // movieTrending.value = movieData;
-    //   } else {
-    //     movieTrending.value = movieTrending.value.concat(movieData);
-    //   }
-    //   console.log(movieTrending);
 };
+
 //Stores to Pinia On Load
 const getAllGenres = async () => {
     store.Action = await getGenres(28);
@@ -159,7 +147,6 @@ const showGenre = () => {
 }
 
 const showModal = (id) => {
-    // console.log(id)
     modalId.value = `${id}`;
     isModalOpen.value = true;
 }
@@ -194,7 +181,7 @@ const showModal = (id) => {
                 { title: 'Thriller', id: 53 },
                 { title: 'War', id: 10752 },
                 { title: 'Western', id: 37 },
-            ]" v-model="selectedOption" ></vue-select>
+            ]" v-model="selectedOption"></vue-select>
             <button id="getGenreButton" @click="showGenre()">Get Movies</button>
         </div>
         <div class="images">
